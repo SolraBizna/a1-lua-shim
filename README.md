@@ -54,7 +54,7 @@ You can prevent subsequent triggers from being called by explicitly returning `f
 
 ## Danger Pairs
 
-`pairs` gets its name changed to `danger_pairs`, so that casual use will be caught. `pairs` is a very useful function, irreplaceable for some purposes, and when used properly it can grant nice performance with no problems. However, careless use will cause films to desync. Thus, this shim renames it to `danger_pairs`. If you need it, and you're sure you're not going to cause a desync by using it, just use the longer name and you're all set.
+`pairs` gets its name changed to `danger_pairs`, so that casual use will be caught. `pairs` is a very useful function, irreplaceable for some purposes, and when used properly it can grant nice performance with no problems. However, careless use will cause films to desync. Thus, this shim renames it to `danger_pairs`. If you need it, and you're sure you're not going to cause a desync by using it, just use the longer name and you're all set. (In fact, *this script* contains two film-safe uses of `danger_pairs`!)
 
 ## Print
 
