@@ -36,6 +36,7 @@ setmetatable(shadow_triggers, {
    __newindex = function(t, key, value)
       if the_real_triggers[key] == nil then
          the_real_triggers[key] = function(...)
+            local ret = true
             for _, subtrigger in ipairs(subtriggers[key]) do
                local success, result = pcall(subtrigger, ...)
                if not success then
@@ -44,9 +45,11 @@ setmetatable(shadow_triggers, {
                elseif result == false then
                   -- If the subtrigger explicitly returned false, don't call
                   -- any more subtriggers.
+                  ret = false
                   break
                end
             end
+            return ret
          end
       end
       if subtriggers[key] == nil then
