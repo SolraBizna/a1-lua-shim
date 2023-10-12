@@ -21,7 +21,7 @@ Triggers = nil
 setmetatable(_G, {
    __index = {Triggers = shadow_triggers},
    __newindex = function(t, key, value)
-      if k == "Triggers" then
+      if key == "Triggers" then
          for key, value in danger_pairs(value) do
             shadow_triggers[key] = value
          end
