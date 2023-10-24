@@ -46,7 +46,7 @@ setmetatable(shadow_triggers, {
                end
                if not success then
                   -- There was a message. Print the error message.
-                  print(result)
+                  print("Error in Triggers."..key..":\n"..result)
                elseif result == false then
                   -- If the subtrigger explicitly returned false, don't call
                   -- any more subtriggers.
