@@ -38,7 +38,12 @@ setmetatable(shadow_triggers, {
          the_real_triggers[key] = function(...)
             local ret = true
             for _, subtrigger in ipairs(subtriggers[key]) do
-               local success, result = pcall(subtrigger, ...)
+               local success, result
+               if debug and debug.traceback and xpcall then
+                  success, result = xpcall(subtrigger, debug.traceback, ...)
+               else
+                  success, result = pcall(subtrigger, ...)
+               end
                if not success then
                   -- There was a message. Print the error message.
                   print(result)
