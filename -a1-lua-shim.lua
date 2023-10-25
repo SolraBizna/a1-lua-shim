@@ -95,13 +95,35 @@ function Triggers.idle()
 end
 
 -- Part 3: There's no downside to calling the restore_* functions if they're
--- not needed. They need to be called at least once per init() if they are
--- needed. So let's call them ourselves!
+-- not needed. They need to be called EXACTLY once per init() if they are
+-- needed. So let's call them ourselves, and cache the result, so that other
+-- triggers can still call them as normal and have them work as expected.
+--
+-- Bonus: make it so that calling the wrong restoration function throws an
+-- error.
 
 function Triggers.init(restoring_game)
+   local RealGame = Game
+   Game = {}
    if restoring_game then
-      Game.restore_saved()
+      local restore_result = RealGame.restore_saved()
+      function Game.restore_saved()
+         return restore_result
+      end
+      function Game.restore_passed()
+         error("restore_passed called, but we were loading from a save!")
+      end
    else
-      Game.restore_passed()
+      local restore_result = RealGame.restore_passed()
+      function Game.restore_passed()
+         return restore_result
+      end
+      function Game.restore_saved()
+         error("restore_saved called, but we were not loading from a save!")
+      end
    end
+   setmetatable(Game, {
+      __index=RealGame,
+      __newindex=RealGame,
+   })
 end
