@@ -60,6 +60,10 @@ You can prevent subsequent triggers from being called by explicitly returning `f
 
 This script makes it so that `print` will print both to the screen *and* to the Aleph One log. It will even work during `Triggers.init` or at the top level of the script.
 
+# Extras
+
+- `secret-menu-lib.lua`: A script designed to be used in conjunction with `-a1-lua-shim.lua`. It provides an overlay-based menu system which you can use to provide configuration, ancillary information, etc. at game time. It claims one overlay slot, normally visible only when the "Lua key" is held down. The menu is navigated with previous/next weapon, and items can be activated with the primary and secondary triggers. The interface is documented in the script itself.
+
 # Legalese
 
 Copyright 2023 Solra Bizna. I expressly authorize you (the reader) to use this script, change it to fit your needs, strip out my name and claim it as your own, whatever. This copyright claim is solely to assert authorship long enough to immediately disclaim all copy-rights.
