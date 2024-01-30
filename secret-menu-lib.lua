@@ -166,6 +166,24 @@ function new_secret_stashed_boolean(
     }
 end
 
+-- Return a string listing the current text displayed by every single menu
+-- item. If there are no menu items, returns nil.
+--
+-- - `player`: Which player's secrets are to be divulged. If not specified, the
+--   local player will be used.
+-- - `delim`: Delimiter to use to separate each menu item. If not specified,
+--   " | " will be used.
+function list_all_secret_menus(player, delim)
+   local player = player or Players.local_player
+   local t = {}
+   for i, item in ipairs(menu_items) do
+      t[#t+1] = hopefully(item.display, item, player) or ("menu[%i] ERROR"):format(i)
+   end
+   if #t == 0 then return nil
+   else return table.concat(t, delim or " | ")
+   end
+end
+
 -------------------------------------------------------------------------------
 -- Internal functions
 -------------------------------------------------------------------------------
